@@ -1,35 +1,60 @@
-import { Tabs } from 'expo-router';
-import React from 'react';
+import CustomHeader from "@/components/CustomHeader";
+import { useTheme } from "@/context/ThemeContext";
+import { Tabs } from "expo-router";
+import { useMemo } from "react";
+import { LayoutAnimation, Platform, Pressable, Text } from "react-native";
 
-import { HapticTab } from '@/components/haptic-tab';
-import { IconSymbol } from '@/components/ui/icon-symbol';
-import { Colors } from '@/constants/theme';
-import { useColorScheme } from '@/hooks/use-color-scheme';
+export default function TabsLayout() {
+  const { theme, toggleTheme } = useTheme();
+  const isWeb = Platform.OS === "web";
 
-export default function TabLayout() {
-  const colorScheme = useColorScheme();
+  const styles = useMemo(
+    () => ({
+      header: { backgroundColor: theme.card },
+      headerTitle: { color: theme.text },
+      tabBar: { backgroundColor: theme.card },
+    }),
+    [theme]
+  );
+
+  const ThemeToggle = () => (
+    <Pressable
+      onPress={() => {
+        LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+        toggleTheme();
+      }}
+      style={{ marginRight: 12 }}
+    >
+      <Text
+        style={{
+          color: theme.text,
+          fontSize: 22,
+          transform: [{ rotate: theme.mode === "light" ? "0deg" : "180deg" }],
+        }}
+      >
+        {theme.mode === "light" ? "🌙" : "☀️"}
+      </Text>
+    </Pressable>
+  );
 
   return (
-    <Tabs
-      screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-        headerShown: false,
-        tabBarButton: HapticTab,
-      }}>
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: 'Home',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="house.fill" color={color} />,
+    <>
+      {isWeb && <CustomHeader />}
+
+      <Tabs
+        screenOptions={{
+          headerRight: !isWeb ? () => <ThemeToggle /> : undefined,
+          headerStyle: styles.header,
+          headerTitleStyle: styles.headerTitle,
+          tabBarStyle: styles.tabBar,
+          tabBarActiveTintColor: theme.primary,
+          tabBarInactiveTintColor: theme.textSecondary,
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: 'Explore',
-          tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen name="index" options={{ title: "Home" }} />
+        <Tabs.Screen name="session" options={{ title: "Session" }} />
+        <Tabs.Screen name="statistics" options={{ title: "Statistics" }} />
+      </Tabs>
+    </>
   );
 }
