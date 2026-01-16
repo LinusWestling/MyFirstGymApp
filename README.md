@@ -1,50 +1,98 @@
-# Welcome to your Expo app 👋
+# MyFirstGymApp 💪
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A cross-platform fitness tracking application built with React Native and Expo. This app helps you manage workout sessions, track exercises, and monitor your fitness progress.
 
-## Get started
+## Features
 
-1. Install dependencies
+- **Session Management**: Create, start, and track workout sessions
+- **Exercise Tracking**: Log exercises with sets, reps, and weights
+- **Workout Editor**: Create and customize your workout routines
+- **Session History**: View your past workout sessions
+- **Statistics**: Track your fitness progress and statistics
+- **Dark/Light Mode**: Toggle between light and dark themes for comfortable viewing
+- **Cross-Platform**: Runs on iOS, Android, and web
+
+## Tech Stack
+
+- **Framework**: [Expo](https://expo.dev) with React Native
+- **Routing**: [Expo Router](https://expo.dev/router) for file-based navigation
+- **State Management**: React Context API for theme management
+- **Storage**: AsyncStorage for persisting user data
+- **TypeScript**: Fully typed for better development experience
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js (v18 or higher)
+- npm or yarn
+
+### Installation
+
+1. Clone the repository
+
+   ```bash
+   git clone https://github.com/LinusWestling/MyFirstGymApp.git
+   cd MyFirstGymApp
+   ```
+
+2. Install dependencies
 
    ```bash
    npm install
    ```
 
-2. Start the app
+### Running the App
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+Start the development server:
 
 ```bash
-npm run reset-project
+npm start
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+or with cache clearing:
 
-## Learn more
+```bash
+npx expo start -c
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+In the terminal output, you'll see options to open the app in:
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+- **Expo Go** (fastest way to test on your phone)
+- **Android Emulator**: Press `a`
+- **iOS Simulator**: Press `i`
+- **Web Browser**: Press `w`
 
-## Join the community
+## Project Structure
 
-Join our community of developers creating universal apps.
+```
+├── app/                      # Main app screens
+│   ├── (tabs)/              # Tab-based navigation
+│   │   ├── index.tsx        # Home screen
+│   │   ├── session.tsx      # Session tracking
+│   │   └── statistics.tsx   # Statistics view
+│   ├── history.tsx          # Workout history
+│   ├── sessionRunner/       # Session execution
+│   └── workoutEditor/       # Workout creation
+├── components/              # Reusable UI components
+├── context/                 # React Context (Theme)
+├── constants/               # App constants
+├── lib/                     # Utilities (Storage)
+└── assets/                  # Images and media
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+## Available Scripts
+
+- `npm start` - Start the development server
+- `npm run android` - Start on Android emulator
+- `npm run ios` - Start on iOS simulator
+- `npm run web` - Start web version
+- `npm run lint` - Run ESLint
+
+## Contributing
+
+Feel free to submit issues and enhancement requests!
+
+## License
+
+This project is open source and available under the MIT License.
